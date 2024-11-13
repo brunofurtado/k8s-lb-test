@@ -7,7 +7,7 @@ WORKDIR /var/www/html
 # Copy the PHP application to the container's web root
 COPY index.php /var/www/html/
 
-RUN chcon -R -t httpd_sys_content_t /var/www/html && restorecon -R -v
+RUN chcon -R -t httpd_sys_content_t /var/www/html && restorecon -R -v /var/www/html
 
 # Expose the port Apache will use (default 80)
 EXPOSE 80
