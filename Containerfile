@@ -5,16 +5,10 @@ FROM registry.redhat.io/ubi9/php-82:9.5-1730595738
 WORKDIR /var/www/html
 
 # Copy the PHP application to the container's web root
-COPY index.php /var/www/html/
-
-USER root
-
-RUN chcon -R -t httpd_sys_content_t /var/www/html && restorecon -R -v /var/www/html
+COPY --chown=www-data:www-data index.php /var/www/html/
 
 # Expose the port Apache will use (default 80)
 EXPOSE 80
-
-USER 1001:1001
 
 # Start Apache in the foreground
 CMD ["httpd", "-D", "FOREGROUND"]
